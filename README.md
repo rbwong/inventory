@@ -1,4 +1,4 @@
-+ Ticket1 -
++ Ticket1 - 30 mins
 + Ticket2 -
 + Ticket3 -
 + Ticket4 -
