@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
 from inventory_system.models import Item, Customer, Supplier, ItemSupplied, PurchaseOrder, SalesInvoice
-from inventory_system.forms import PurchaseOrderForm
+from inventory_system.forms import PurchaseOrderForm, SalesInvoiceForm
 
 @login_required
 def hello_world(request):
@@ -27,3 +27,14 @@ class NewPurchaseOrderView(CreateView):
         item_supplied.item.quantity += form.instance.quantity
         item_supplied.item.save()
         return super(NewPurchaseOrderView, self).form_valid(form)
+
+
+class NewSalesInvoiceView(CreateView):
+    template_name = 'inventory_system/new_sales_invoice.html'
+    form_class = SalesInvoiceForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.item.quantity -= form.instance.quantity
+        form.instance.item.save()
+        return super(NewSalesInvoiceView, self).form_valid(form)

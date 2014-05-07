@@ -11,6 +11,18 @@ class PurchaseOrderForm(forms.ModelForm):
     class Meta:
         model = PurchaseOrder
         fields = ('no', 'quantity')
+
+
+class SalesInvoiceForm(forms.ModelForm):
+    no = forms.CharField(required=True)
+    customer = forms.ModelChoiceField(Customer.objects.all())
+    item = forms.ModelChoiceField(Item.objects.all())
+    quantity = forms.CharField(required=True)
+
+    class Meta:
+        model = SalesInvoice
+        fields = ('no', 'customer', 'item', 'quantity')
+
 '''
 class ThreadCreationForm(forms.ModelForm):
     name = forms.CharField(required=True)
