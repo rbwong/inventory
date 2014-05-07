@@ -43,7 +43,7 @@ class ItemSupplied(models.Model):
 
 
 class PurchaseOrder(models.Model):
-    no = models.IntegerField()
+    no = models.IntegerField(unique=True)
     supplier = models.ForeignKey(Supplier)
     item = models.ForeignKey(Item)
     quantity = models.IntegerField()
@@ -59,7 +59,7 @@ class PurchaseOrder(models.Model):
 
 
 class SalesInvoice(models.Model):
-    no = models.IntegerField()
+    no = models.IntegerField(unique=True)
     customer = models.ForeignKey(Customer)
     item = models.ForeignKey(Item)
     quantity = models.IntegerField()

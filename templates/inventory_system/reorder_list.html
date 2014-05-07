@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Items that needs to be reordered</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100">Item Code</th>
+                <th width="100">Item Name</th>
+                <th width="100">Quantity</th>
+                <th width="100">Reorder Point</th>
+                <th width="100"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if object_list %}
+                {% for item in object_list %}
+                    <tr>
+                        <td>{{ item.item_code }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.reorder_point }}</td>
+                        <td><a href="/new_purchase_order?item={{ item.item_code }}">Create Purchase Order</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td span="4">No more entries</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

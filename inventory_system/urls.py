@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^new_sales_invoice/$', login_required(NewSalesInvoiceView.as_view())),
     url(r'^purchase_order/$', login_required(PurchaseOrderListView.as_view())),
     url(r'^sales_invoice/$', login_required(SalesInvoiceListView.as_view())),
+    url(r'^reorder_items/$', login_required(ReorderListView.as_view())),
     url(r'^create_purchase_order$', views.hello_world),
 )
