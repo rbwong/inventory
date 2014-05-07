@@ -24,7 +24,7 @@ class ItemSuppliedAdmin(admin.ModelAdmin):
 
 
 class PurchaseOrderAdmin(admin.ModelAdmin):
-    list_display = ('supplier_name', 'item_name', 'quantity', 'date_created')
+    list_display = ('no', 'supplier_name', 'item_name', 'quantity', 'date_created')
 
     def supplier_name(self, instance):
         return instance.supplier.name
@@ -34,7 +34,7 @@ class PurchaseOrderAdmin(admin.ModelAdmin):
 
 
 class SalesInvoiceAdmin(admin.ModelAdmin):
-    list_display = ('customer_name', 'item_name', 'quantity', 'date_created')
+    list_display = ('no', 'customer_name', 'item_name', 'quantity', 'date_created')
 
     def customer_name(self, instance):
         return instance.customer.name

@@ -39,7 +39,7 @@ class ItemSupplied(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.supplier.name
+        return self.supplier.name + ' - ' + self.item.name
 
 
 class PurchaseOrder(models.Model):
@@ -49,6 +49,14 @@ class PurchaseOrder(models.Model):
     quantity = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+
+        if self.pk is None:
+            super(PurchaseOrder, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.supplier.name + ' - ' + self.item.name
+
 
 class SalesInvoice(models.Model):
     no = models.IntegerField()
@@ -56,3 +64,8 @@ class SalesInvoice(models.Model):
     item = models.ForeignKey(Item)
     quantity = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+
+        if self.pk is None:
+            super(SalesInvoice, self).save(*args, **kwargs)
