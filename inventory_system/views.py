@@ -38,3 +38,23 @@ class NewSalesInvoiceView(CreateView):
         form.instance.item.quantity -= form.instance.quantity
         form.instance.item.save()
         return super(NewSalesInvoiceView, self).form_valid(form)
+
+
+class PurchaseOrderListView(ListView):
+    
+    queryset = PurchaseOrder.objects.order_by('-date_created')
+    template_name = 'inventory_system/purchase_order_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PurchaseOrderListView, self).get_context_data(**kwargs)
+        return context
+
+
+class SalesInvoiceListView(ListView):
+    
+    queryset = SalesInvoice.objects.order_by('-date_created')
+    template_name = 'inventory_system/sales_invoice_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SalesInvoiceListView, self).get_context_data(**kwargs)
+        return context

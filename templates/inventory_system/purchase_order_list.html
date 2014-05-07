@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Purchase Order</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100">Purchase Order Number</th>
+                <th width="100">Supplier</th>
+                <th width="100">Item</th>
+                <th width="100">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if object_list %}
+                {% for purchase_order in object_list %}
+                    <tr>
+                        <td>{{ purchase_order.no }}</td>
+                        <td>{{ purchase_order.supplier.name }}</td>
+                        <td>{{ purchase_order.item.name }}</td>
+                        <td>{{ purchase_order.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td span="4">No more entries</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}
