@@ -10,11 +10,6 @@ from inventory_system.models import Item, Customer, Supplier, ItemSupplied, Purc
 from inventory_system.forms import PurchaseOrderForm, SalesInvoiceForm
 from django.db.models import F
 
-@login_required
-def hello_world(request):
-    return HttpResponse("Hello, world.")
-
-
 class NewPurchaseOrderView(CreateView):
     template_name = 'inventory_system/new_purchase_order.html'
     form_class = PurchaseOrderForm
@@ -42,6 +37,14 @@ class NewSalesInvoiceView(CreateView):
     template_name = 'inventory_system/new_sales_invoice.html'
     form_class = SalesInvoiceForm
     success_url = '/'
+
+    def get_form(self, form_class):
+        form = super(NewSalesInvoiceView, self).get_form(form_class)
+        if self.request.GET.get('item'):
+            item = get_object_or_404(Item, item_code=self.request.GET.get('item'))
+            form.fields['item'].initial = item
+
+        return form
 
     def form_valid(self, form):
         form.instance.item.quantity -= form.instance.quantity
@@ -76,4 +79,28 @@ class ReorderListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReorderListView, self).get_context_data(**kwargs)
+        return context
+
+
+class ItemListView(ListView):
+    
+    queryset = Item.objects.all().order_by('-date_created')
+    template_name = 'inventory_system/item_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemListView, self).get_context_data(**kwargs)
+        return context
+
+
+class ItemDetailView(DetailView):
+    template_name = 'inventory_system/item.html'
+
+    def get_object(self):
+        return get_object_or_404(Item, item_code=self.args[0])
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context['sales_invoice_list'] = SalesInvoice.objects.filter(item=self.object).order_by('-date_created')
+        context['item_supplied'] = ItemSupplied.objects.filter(item=self.object).order_by('-date_created')
+        context['purchase_order_list'] = PurchaseOrder.objects.filter(item=self.object).order_by('-date_created')
         return context
