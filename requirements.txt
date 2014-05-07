@@ -1,0 +1,7 @@
+Django==1.6.4
+South==0.8.4
+django-crispy-forms==1.4.0
+stevedore==0.15
+virtualenv==1.11.5
+virtualenv-clone==0.2.5
+virtualenvwrapper==4.2

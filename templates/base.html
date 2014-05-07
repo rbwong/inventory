@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+{% load staticfiles %} 
+
+<html>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <title>{% block title %}Bulletin Board System{% endblock %}</title>
+        
+        <link rel="stylesheet" href="{% static "css/base.css" %}" /> 
+        {% block css %}{% endblock %}
+
+        {% block js_up %}{% endblock %}
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="content">{% block body %}{% endblock %}</div>
+        </div>
+    </body>
+
+    {% block js_bottom %}{% endblock %}
+</html>
