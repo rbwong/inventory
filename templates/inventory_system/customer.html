@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>{{ customer.name }}</h2>
+    <h4>Address: {{ customer.address }} </h4>
+    <h4>Contact: {{ customer.contact }} </h4>
+    <h4>Email: {{ customer.email }} </h4>
+
+    <br>
+
+    <h4>Sales Invoice</h4>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100">Sales Invoice Number</th>
+                <th width="100">Customer</th>
+                <th width="100">Item</th>
+                <th width="100">Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if sales_invoice_list %}
+                {% for sales_invoice in sales_invoice_list %}
+                    <tr>
+                        <td>{{ sales_invoice.no }}</td>
+                        <td>{{ sales_invoice.supplier.name }}</td>
+                        <td>{{ sales_invoice.item.name }}</td>
+                        <td>{{ sales_invoice.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td span="4">No more entries</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

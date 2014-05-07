@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Supplier</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100">Name</th>
+                <th width="100">Address</th>
+                <th width="100">Contact</th>
+                <th width="100">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if object_list %}
+                {% for supplier in object_list %}
+                    
+                    <tr>
+                        <td><a href="/supplier/{{ supplier.id }}">{{ supplier.name }}</a></td>
+                        <td>{{ supplier.address }}</td>
+                        <td>{{ supplier.contact }}</td>
+                        <td>{{ supplier.email }}</td>
+                    </tr>
+                    
+                {% endfor %}
+            {% else %}
+                <tr><td span="4">No more entries</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

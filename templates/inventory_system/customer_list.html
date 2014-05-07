@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h2>Customer</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100">Name</th>
+                <th width="100">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if object_list %}
+                {% for customer in object_list %}
+                    
+                    <tr>
+                        <td><a href="/customer/{{ customer.id }}">{{ customer.name }}</a></td>
+                        <td>{{ customer.address }}</td>
+                    </tr>
+                    
+                {% endfor %}
+            {% else %}
+                <tr><td span="4">No more entries</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

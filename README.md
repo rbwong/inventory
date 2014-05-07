@@ -2,5 +2,5 @@
 + Ticket2 - 10 mins
 + Ticket3 - 30 mins
 + Ticket4 - 70 mins
-+ Ticket5 -
-+ Ticket6 -
++ Ticket5 - 20 mins
++ Ticket6 - 20 mins

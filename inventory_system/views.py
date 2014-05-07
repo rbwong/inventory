@@ -104,3 +104,47 @@ class ItemDetailView(DetailView):
         context['item_supplied'] = ItemSupplied.objects.filter(item=self.object).order_by('-date_created')
         context['purchase_order_list'] = PurchaseOrder.objects.filter(item=self.object).order_by('-date_created')
         return context
+
+
+class CustomerListView(ListView):
+    
+    model = Customer
+    template_name = 'inventory_system/customer_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerListView, self).get_context_data(**kwargs)
+        return context
+
+
+class CustomerDetailView(DetailView):
+    template_name = 'inventory_system/customer.html'
+
+    def get_object(self):
+        return get_object_or_404(Customer, id=self.args[0])
+
+    def get_context_data(self, **kwargs):
+        context = super(CustomerDetailView, self).get_context_data(**kwargs)
+        context['sales_invoice_list'] = SalesInvoice.objects.filter(customer=self.object).order_by('-date_created')
+        return context
+
+
+class SupplierListView(ListView):
+    
+    model = Supplier
+    template_name = 'inventory_system/supplier_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SupplierListView, self).get_context_data(**kwargs)
+        return context
+
+class SupplierDetailView(DetailView):
+    template_name = 'inventory_system/supplier.html'
+
+    def get_object(self):
+        return get_object_or_404(Supplier, id=self.args[0])
+
+    def get_context_data(self, **kwargs):
+        context = super(SupplierDetailView, self).get_context_data(**kwargs)
+        context['item_supplied'] = ItemSupplied.objects.filter(supplier=self.object).order_by('-date_created')
+        context['purchase_order_list'] = PurchaseOrder.objects.filter(supplier=self.object).order_by('-date_created')
+        return context
