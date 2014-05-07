@@ -11,13 +11,21 @@
     <head>
         <title>{% block title %}Inventory System{% endblock %}</title>
         
-        <link rel="stylesheet" href="{% static "css/base.css" %}" /> 
         {% block css %}{% endblock %}
 
         {% block js_up %}{% endblock %}
     </head>
 
     <body>
+        <ul>
+            <li><a href="/">View Items</a></li>
+            <li><a href="/reorder_items">View Items for Reorder</a></li>
+            <li><a href="/customers">View Customers</a></li>
+            <li><a href="/suppliers">View Suppliers</a></li>
+            <li><a href="/new_purchase_order">Create Purchase Order</a></li>
+            <li><a href="/new_sales_invoice">Create Sales Invoice</a></li>
+        </ul>
+
         <div id="container">
             <div id="content">{% block body %}{% endblock %}</div>
         </div>
