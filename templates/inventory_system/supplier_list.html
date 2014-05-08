@@ -1,31 +1,42 @@
 {% extends "base.html" %}
 
+{% block body_header %}
+    {% include "navbar.html" %}
+{% endblock %}
+
 {% block body %}
-    <h2>Suppliers</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th width="100">Name</th>
-                <th width="100">Address</th>
-                <th width="100">Contact</th>
-                <th width="100">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if object_list %}
-                {% for supplier in object_list %}
-                    
+    <div class="container">
+        <div class="page-header">
+          <h2>Suppliers</h2>
+        </div>
+        
+        <div class="panel panel-default">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><a href="/supplier/{{ supplier.id }}">{{ supplier.name }}</a></td>
-                        <td>{{ supplier.address }}</td>
-                        <td>{{ supplier.contact }}</td>
-                        <td>{{ supplier.email }}</td>
+                        <th width="100">Name</th>
+                        <th width="100">Address</th>
                     </tr>
-                    
-                {% endfor %}
-            {% else %}
-                <tr><td span="4">No more entries</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {% if object_list %}
+                        {% for supplier in object_list %}
+                            
+                            <tr>
+                                <td><a href="/supplier/{{ supplier.id }}">{{ supplier.name }}</a></td>
+                                <td>{{ supplier.address }}</td>
+                            </tr>
+                            
+                        {% endfor %}
+                    {% else %}
+                        <tr><td span="4">No more entries</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_footer %}
+    {% include "footer.html" %}
 {% endblock %}

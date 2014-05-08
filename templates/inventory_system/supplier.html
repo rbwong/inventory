@@ -1,40 +1,52 @@
 {% extends "base.html" %}
 
+{% block body_header %}
+    {% include "navbar.html" %}
+{% endblock %}
+
 {% block body %}
-    <h2>{{ supplier.name }}</h2>
-    <h4>Address: {{ supplier.address }} </h4>
-    <h4>Items: 
-        {% for item_sup in item_supplied %}
-            {{ item_sup.item.name }}, 
-        {% endfor %}    
-    </h4>
+    <div class="container">
+        <h2>{{ supplier.name }}</h2>
+        <h4>Address: {{ supplier.address }} </h4>
+        <h4>Items: 
+            {% for item_sup in item_supplied %}
+                {{ item_sup.item.name }}, 
+            {% endfor %}    
+        </h4>
 
-    <br>
+        <br>
 
-    <h4>Purchase Order</h4>
-    <hr>
-    <table class="table">
-        <thead>
-            <tr>
-                <th width="100">Purchase Order Number</th>
-                <th width="100">Supplier</th>
-                <th width="100">Item</th>
-                <th width="100">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if purchase_order_list %}
-                {% for purchase_order in purchase_order_list %}
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+          <div class="panel-heading">Purchase Order</div>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ purchase_order.no }}</td>
-                        <td>{{ purchase_order.supplier.name }}</td>
-                        <td>{{ purchase_order.item.name }}</td>
-                        <td>{{ purchase_order.quantity }}</td>
+                        <th width="100">Purchase Order Number</th>
+                        <th width="100">Supplier</th>
+                        <th width="100">Item</th>
+                        <th width="100">Quantity</th>
                     </tr>
-                {% endfor %}
-            {% else %}
-                <tr><td span="4">No more entries</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {% if purchase_order_list %}
+                        {% for purchase_order in purchase_order_list %}
+                            <tr>
+                                <td>{{ purchase_order.no }}</td>
+                                <td>{{ purchase_order.supplier.name }}</td>
+                                <td>{{ purchase_order.item.name }}</td>
+                                <td>{{ purchase_order.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td span="4">No more entries</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_footer %}
+    {% include "footer.html" %}
 {% endblock %}

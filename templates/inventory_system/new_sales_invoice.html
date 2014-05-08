@@ -1,10 +1,28 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load bootstrap3 %}
+
+{% block body_header %}
+    {% include "navbar.html" %}
+{% endblock %}
 
 {% block body %}
-    <form action="/new_sales_invoice/" method="post">
-    	{% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Save" />
-    </form>
+	<div class="container">
+		<div class="panel panel-default">
+  			<div class="panel-body">
+  				<div class="page-header">
+				  <h2>New Sales Invoice <small>{{ filter }}</small></h2>
+				</div>
+			    <form action="/new_sales_invoice/" method="post"  class="form-new-sales-invoice">
+			    	{% csrf_token %}
+			        {% bootstrap_form form %}
+			        <button class="btn btn-lg btn-primary" type="submit">Save</button>
+			    </form>
+			</div>
+		</div>
+    </div>	
+{% endblock %}
+
+{% block body_footer %}
+    {% include "footer.html" %}
 {% endblock %}

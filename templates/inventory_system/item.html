@@ -1,70 +1,89 @@
 {% extends "base.html" %}
 
+{% block body_header %}
+    {% include "navbar.html" %}
+{% endblock %}
+
 {% block body %}
-    <h2>{{ item.name }} ({{ item.item_code }})</h2>
-    <h4>Quantity: {{ item.quantity }} </h4>
-    <h4>Reorder Point: {{ item.reorder_point }} </h4>
-    <h4>Suppliers: 
-        {% for item_sup in item_supplied %}
-            {{ item_sup.supplier.name }}, 
-        {% endfor %}    
-    </h4>
+    <div class="container">
+        <h2>{{ item.name }} ({{ item.item_code }})</h2>
+        <h4>Quantity: {{ item.quantity }} </h4>
+        <h4>Reorder Point: {{ item.reorder_point }} </h4>
+        <h4>Suppliers: 
+            {% for item_sup in item_supplied %}
+                {{ item_sup.supplier.name }}, 
+            {% endfor %}    
+        </h4>
 
-    <a href="/new_purchase_order?item={{ item.item_code }}">Create Purchase Order</a>
-    <a href="/new_sales_invoice?item={{ item.item_code }}">Create Sales Invoice</a>
-    <br>
+        <br>
+        <br>
 
-    <h4>Purchase Order</h4>
-    <hr>
-    <table class="table">
-        <thead>
-            <tr>
-                <th width="100">Purchase Order Number</th>
-                <th width="100">Supplier</th>
-                <th width="100">Item</th>
-                <th width="100">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if purchase_order_list %}
-                {% for purchase_order in purchase_order_list %}
+        <a class="btn btn-lg btn-default btn-sm" href="/new_purchase_order?item={{ item.item_code }}">Create Purchase Order</a>
+        <a class="btn btn-lg btn-default btn-sm" href="/new_sales_invoice?item={{ item.item_code }}">Create Sales Invoice</a>
+        
+        <br>
+        <br>
+
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+          <div class="panel-heading">Purchase Order</div>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ purchase_order.no }}</td>
-                        <td>{{ purchase_order.supplier.name }}</td>
-                        <td>{{ purchase_order.item.name }}</td>
-                        <td>{{ purchase_order.quantity }}</td>
+                        <th width="100">Purchase Order Number</th>
+                        <th width="100">Supplier</th>
+                        <th width="100">Item</th>
+                        <th width="100">Quantity</th>
                     </tr>
-                {% endfor %}
-            {% else %}
-                <tr><td span="4">No more entries</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {% if purchase_order_list %}
+                        {% for purchase_order in purchase_order_list %}
+                            <tr>
+                                <td>{{ purchase_order.no }}</td>
+                                <td>{{ purchase_order.supplier.name }}</td>
+                                <td>{{ purchase_order.item.name }}</td>
+                                <td>{{ purchase_order.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td span="4">No more entries</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
 
-    <h4>Sales Invoice</h4>
-    <hr>
-    <table class="table">
-        <thead>
-            <tr>
-                <th width="100">Sales Invoice Number</th>
-                <th width="100">Customer</th>
-                <th width="100">Item</th>
-                <th width="100">Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if sales_invoice_list %}
-                {% for sales_invoice in sales_invoice_list %}
+        <div class="panel panel-default">
+        <!-- Default panel contents -->
+          <div class="panel-heading">Sales Invoice</div>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ sales_invoice.no }}</td>
-                        <td>{{ sales_invoice.supplier.name }}</td>
-                        <td>{{ sales_invoice.item.name }}</td>
-                        <td>{{ sales_invoice.quantity }}</td>
+                        <th width="100">Sales Invoice Number</th>
+                        <th width="100">Customer</th>
+                        <th width="100">Item</th>
+                        <th width="100">Quantity</th>
                     </tr>
-                {% endfor %}
-            {% else %}
-                <tr><td span="4">No more entries</td></tr>
-            {% endif %}
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    {% if sales_invoice_list %}
+                        {% for sales_invoice in sales_invoice_list %}
+                            <tr>
+                                <td>{{ sales_invoice.no }}</td>
+                                <td>{{ sales_invoice.supplier.name }}</td>
+                                <td>{{ sales_invoice.item.name }}</td>
+                                <td>{{ sales_invoice.quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td span="4">No more entries</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_footer %}
+    {% include "footer.html" %}
 {% endblock %}

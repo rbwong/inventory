@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'auth',
     'inventory_system',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (

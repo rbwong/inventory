@@ -1,0 +1,7 @@
+.table {
+  width: 100%;
+}
+
+.form-new_purchase_order, .form-new-sales-invoice {
+	width: 400px;
+}
